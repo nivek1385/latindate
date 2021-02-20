@@ -134,7 +134,7 @@ holiday() {
     "Jan")
       case $day in
         "3")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Dies Primus Compitalia"
           else #90% chance
@@ -157,14 +157,14 @@ holiday() {
           holidaygreeting="Ave, Auguste! Ave, Princeps! Octavian granted the titles of Augustus and Princeps"
         ;;
         "24")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Sementivae"
           else #90% chance
             holidaygreeting="Assassination of Caligula by the Praetorian Guard"
           fi
         ;;
-        "24"|"25"|"26")
+        "25"|"26")
           holidaygreeting="Celebration of the Sementivae"
         ;;
         "27")
@@ -178,7 +178,7 @@ holiday() {
           holidaygreeting="Celebration of the Parentalia"
         ;;
         "15")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -186,7 +186,7 @@ holiday() {
           fi
         ;;
         "17")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -194,7 +194,7 @@ holiday() {
           fi
         ;;
         "21")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -202,7 +202,7 @@ holiday() {
           fi
         ;;
         "22")
-          holselect=$(($(($RANDOM%10))%10)) #random number 0-9
+          holselect=$(($((RANDOM%10))%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -220,7 +220,7 @@ holiday() {
     "Mar")
       case $day in
         "14")
-          holselect=$(($(($RANDOM%10))%2)) #random number 0-1
+          holselect=$(($((RANDOM%10))%2)) #random number 0-1
           if [ $holselect -eq 0 ]; then #50% chance
             holidaygreeting="Celebration of the second Equirria"
           else #50% chance
@@ -243,6 +243,7 @@ holiday() {
 #   1  APR - Veneralia
 #   4-10 APR - Ludi Megalenses
 #   12-19 APR - Ludi Cereri\Cerialia
+#   6 May - Crassus killed at the Battle of Carrhae
 #   9,11,13 MAY - Lemuria, festival of the dead
 #   15 May - Mercuralia
 #   7 Jun - Ludi Piscatorii
@@ -250,19 +251,18 @@ holiday() {
 #   12 JUL - CIC's bday
 #   6-13 JUL - Ludi Apollinares
 #   18 JUL - dies ater (defeat of Rome by Gauls at the Battle of the Allia in 390BC)
-#   23 JUL - Neptunalia
-#   2 AUG - Hannibal's defeat at the Battle of Cannae
-#   19 OCT - Scipio Africanus defeats Carthage at the Battle of Zama
-#   6 May - Crassus killed at the Battle of Carrhae
-#   23 OCT - Brutus commits suicide 
-#   2 SEP - Battle of Actium
-#   1 AUG - Antony commits suicide
-#   30 AUG - Cleopatra commits suicide
-#   19 AUG - Death of Augustus
 #   18 JUL - Great Fire of Rome, Nero "fiddles"
-#   24 AUG - Vesuvius
+#   23 JUL - Neptunalia
+#   1 AUG - Antony commits suicide
+#   2 AUG - Hannibal's defeat at the Battle of Cannae
 #   10 AUG - Hadrian named Trajan's heir
+#   19 AUG - Death of Augustus
+#   24 AUG - Vesuvius
+#   30 AUG - Cleopatra commits suicide
+#   2 SEP - Battle of Actium
 #   4 SEP - Fall of western empire to Odoacer
+#   19 OCT - Scipio Africanus defeats Carthage at the Battle of Zama
+#   23 OCT - Brutus commits suicide 
 } #holiday
 
 ablmonth() { #month in ablative case
