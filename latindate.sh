@@ -1,34 +1,10 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Author: Kevin Hartley
-#Version: 2021-02-19
-#Future versions to accept dates other than current date and output formats beyond AUC year.
-#Future versions also to include the following holidays:
-#   1  APR - Veneralia
-#   4-10 APR - Ludi Megalenses
-#   12-19 APR - Ludi Cereri\Cerialia
-#   9,11,13 MAY - Lemuria, festival of the dead
-#   15 May - Mercuralia
-#   7 Jun - Ludi Piscatorii
-#   7-15 Jun - Vestalia
-#   12 JUL - CIC's bday
-#   6-13 JUL - Ludi Apollinares
-#   18 JUL - dies ater (defeat of Rome by Gauls at the Battle of the Allia in 390BC)
-#   23 JUL - Neptunalia
-#   2 AUG - Hannibal's defeat at the Battle of Cannae
-#   19 OCT - Scipio Africanus defeats Carthage at the Battle of Zama
-#   6 May - Crassus killed at the Battle of Carrhae
-#   15 MAR - Assassination of CIC
-#   23 OCT - Brutus commits suicide 
-#   2 SEP - Battle of Actium
-#   1 AUG - Antony commits suicide
-#   30 AUG - Cleopatra commits suicide
-#   19 AUG - Death of Augustus
-#   18 JUL - Great Fire of Rome, Nero "fiddles"
-#   24 AUG - Vesuvius
-#   10 AUG - Hadrian named Trajan's heir
-#   4 SEP - Fall of western empire to Odoacer
-#   
+#Version: 2021-02-20
+#Future Features:
+#-Add dates of note for Nov and Dec
+#-Accept dates other than current date and output formats beyond AUC year.
 
 #Defaults
 holidaygreeting=""
@@ -134,7 +110,7 @@ holiday() {
     "Jan")
       case $day in
         "3")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Dies Primus Compitalia"
           else #90% chance
@@ -157,7 +133,7 @@ holiday() {
           holidaygreeting="Ave, Auguste! Ave, Princeps! Octavian granted the titles of Augustus and Princeps"
         ;;
         "24")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Sementivae"
           else #90% chance
@@ -178,7 +154,7 @@ holiday() {
           holidaygreeting="Celebration of the Parentalia"
         ;;
         "15")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -186,7 +162,7 @@ holiday() {
           fi
         ;;
         "17")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -194,7 +170,7 @@ holiday() {
           fi
         ;;
         "21")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -202,7 +178,7 @@ holiday() {
           fi
         ;;
         "22")
-          holselect=$(($((RANDOM%10))%10)) #random number 0-9
+          holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
             holidaygreeting="Celebration of the Parentalia"
           else #90% chance
@@ -220,7 +196,7 @@ holiday() {
     "Mar")
       case $day in
         "14")
-          holselect=$(($((RANDOM%10))%2)) #random number 0-1
+          holselect=$((RANDOM%2)) #random number 0-1
           if [ $holselect -eq 0 ]; then #50% chance
             holidaygreeting="Celebration of the second Equirria"
           else #50% chance
@@ -234,35 +210,130 @@ holiday() {
     ;; #Mar
     "Apr")
       case $day in
+        "1")
+          holidaygreeting="Celebration of the Veneralia"
+        ;;
+        "4"|"5"|"6"|"7"|"8"|"9"|"10")
+          holidaygreeting="Ludi Megalenses, enjoy the games!"
+        ;;
+        "12"|"13"|"14"|"15"|"16"|"17"|"18"|"19")
+          holselect=$((RANDOM%4)) #random number 0-3
+          case $holselect in
+            "0")
+              games="greens"
+            ;;
+            "1")
+              games="reds"
+            ;;
+            "2")
+              games="blues"
+            ;;
+            "3")
+              games="whites"
+            ;;
+          esac
+          holidaygreeting="Ludi Cereri\Cerialia, let's go $games!"
+        ;;
         "21")
           holidaygreeting="LAETUS NATALIS DIES, ROMAE! Rome was founded by Romulus on this day!"
         ;;
       esac
     ;; #Apr
+    "May")
+        "6")
+          holidaygreeting="Requiescat in pace, Crasse! Crassus killed at the battle of Carrhae."
+        ;;
+        "9"|"11"|"13")
+          holidaygreeting="Celebration of the Lemuria, the festival of the dead"
+        ;;
+        "15")
+          holidaygreeting="Celebration of the Mercuralia"
+        ;;
+    ;; #May
+    "Jun")
+        "7")
+          holselect=$((RANDOM%10)) #random number 0-9
+          if [ $holselect -eq 0 ]; then #10% chance
+            holidaygreeting="Celebration of the Vestalia"
+          else #90% chance
+            holidaygreeting="Ludi Piscatorii, remember to dedicate your fish to Vulcan!"
+          fi
+        ;;
+        "8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")
+          holidaygreeting="Celebration of the Vestalia"
+        ;;
+    ;; #Jun
+    "Jul")
+        "12")
+          holselect=$((RANDOM%10)) #random number 0-9
+          if [ $holselect -eq 0 ]; then #10% chance
+            holidaygreeting="Ludi Apollinares, enjoy the theatre performances!"
+          else #90% chance
+            holidaygreeting="Laetus natalis dies, Gaie Iulie Caesar! Birthday of Julius Caesar"
+          fi
+        ;;
+        "6"|"7"|"8"|"9"|"10"|"11"|"13")
+          holidaygreeting="Ludi Apollinares, enjoy the theatre performances!"
+        ;;
+        "18")
+          holselect=$((RANDOM%2)) #random number 0-1
+          if [ $holselect -eq 0 ]; then #50% chance
+            holidaygreeting="Rememberence of the Dies Ater (defeat by the Gauls at the Battle of the Allia in 390BC)"
+          else #50% chance
+            holidaygreeting="Great fire of Rome, grab a fiddle and join Emperor Nero."
+          fi
+        ;;
+        "23")
+          holidaygreeting="Celebration of the Neptunalia"
+        ;;
+    ;; #Jul
+    "Aug")
+        "1")
+          holidaygreeting="Requiescat in pace, Marce Antonie!"
+        ;;
+        "2")
+          holidaygreeting="Hannibal defeated at the battle of Cannae!"
+        ;;
+        "10")
+          holselect=$((RANDOM%2)) #random number 0-1
+          if [ $holselect -eq 0 ]; then #50% chance
+            holidaygreeting="Trajan named Hadrian as his heir."
+          else #50% chance
+            holidaygreeting="Requiescat in pace, Cleopatra. Cleopatra commits suicide."
+          fi
+          holidaygreeting="Trajan named Hadrian as his heir."
+        ;;
+        "19")
+          holidaygreeting="Requiescat in pace, Auguste! Death of Augustus"
+        ;;
+        "24")
+          holidaygreeting="Cave Vesuvium Montem!"
+        ;;
+        "29")
+          holidaygreeting="Requiescat in pace, Caesarion. With his death, Egypt becomes a province of Rome."
+        ;;
+    ;; #Aug
+    "Sep")
+        "2")
+          holidaygreeting="Anniversary of the battle of Actium"
+        ;;
+        "4")
+          holidaygreeting="Fall of the western empire to Odoacer"
+        ;;
+    ;; #Sep
+    "Oct")
+        "19")
+          holidaygreeting="Carthago delenda erat! Scipio Africanus defeated Carthage at the Battle of Zama ending the Second Punic War."
+        ;;
+        "23")
+          holidaygreeting="Requiescat in pace, Marce Iunie Brute! Brutus commits suicide."
+        ;;
+    ;; #Oct
+#    "Nov")
+#    ;; #Nov
+#    "Dec")
+#    ;; #Dec
   esac
-#   1  APR - Veneralia
-#   4-10 APR - Ludi Megalenses
-#   12-19 APR - Ludi Cereri\Cerialia
-#   6 May - Crassus killed at the Battle of Carrhae
-#   9,11,13 MAY - Lemuria, festival of the dead
-#   15 May - Mercuralia
-#   7 Jun - Ludi Piscatorii
-#   7-15 Jun - Vestalia
-#   12 JUL - CIC's bday
-#   6-13 JUL - Ludi Apollinares
-#   18 JUL - dies ater (defeat of Rome by Gauls at the Battle of the Allia in 390BC)
-#   18 JUL - Great Fire of Rome, Nero "fiddles"
-#   23 JUL - Neptunalia
-#   1 AUG - Antony commits suicide
-#   2 AUG - Hannibal's defeat at the Battle of Cannae
-#   10 AUG - Hadrian named Trajan's heir
-#   19 AUG - Death of Augustus
-#   24 AUG - Vesuvius
-#   30 AUG - Cleopatra commits suicide
-#   2 SEP - Battle of Actium
-#   4 SEP - Fall of western empire to Odoacer
-#   19 OCT - Scipio Africanus defeats Carthage at the Battle of Zama
-#   23 OCT - Brutus commits suicide 
 } #holiday
 
 ablmonth() { #month in ablative case
