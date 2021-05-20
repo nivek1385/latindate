@@ -1,7 +1,7 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Author: Kevin Hartley
-#Version: 2021-02-20
+#Version: 2021-05-20
 #Future Features:
 #-Add dates of note for Nov and Dec
 #-Accept dates other than current date and output formats beyond AUC year.
@@ -43,13 +43,13 @@ main() {
   elif [[ $day -ge 2 && $day -lt $((nones - one)) ]]; then
     accmonth
     num=$((nones - day + one))
-    num=$(./num2roman.sh $num)
+    num=$(~/latindate/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Nonas $latmon "
   elif [[ $day -gt $nones && $day -lt $((ides - one)) ]]; then
     accmonth
     num=$((ides - day + one))
-    num=$(./num2roman.sh $num)
+    num=$(~/latindate/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Idus $latmon "
   elif [[ $day == $((nones - one)) ]]; then
@@ -76,7 +76,7 @@ main() {
       ;;
     esac
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
-    num=$(./num2roman.sh $num)
+    num=$(~/latindate/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     if [[ $num == "ii" ]]; then
       latindate="Hodie est pridie Kalendas $latmon "
@@ -87,7 +87,7 @@ main() {
     echo "ERROR: day var didn't match any if statement."
   fi
   aucyear=$(toAUC "$year")
-  convyear=$(./num2roman.sh "$aucyear")
+  convyear=$(~/latindate/num2roman.sh "$aucyear")
   if [[ "$holidaygreeting" != "" ]]; then
     echo "$holidaygreeting"
   fi
@@ -240,6 +240,7 @@ holiday() {
       esac
     ;; #Apr
     "May")
+      case $day in
         "6")
           holidaygreeting="Requiescat in pace, Crasse! Crassus killed at the battle of Carrhae."
         ;;
@@ -249,8 +250,10 @@ holiday() {
         "15")
           holidaygreeting="Celebration of the Mercuralia"
         ;;
+      esac
     ;; #May
     "Jun")
+      case $day in
         "7")
           holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
@@ -262,8 +265,10 @@ holiday() {
         "8"|"9"|"10"|"11"|"12"|"13"|"14"|"15")
           holidaygreeting="Celebration of the Vestalia"
         ;;
+      esac
     ;; #Jun
     "Jul")
+      case $day in
         "12")
           holselect=$((RANDOM%10)) #random number 0-9
           if [ $holselect -eq 0 ]; then #10% chance
@@ -286,8 +291,10 @@ holiday() {
         "23")
           holidaygreeting="Celebration of the Neptunalia"
         ;;
+      esac
     ;; #Jul
     "Aug")
+      case $day in
         "1")
           holidaygreeting="Requiescat in pace, Marce Antonie!"
         ;;
@@ -312,22 +319,27 @@ holiday() {
         "29")
           holidaygreeting="Requiescat in pace, Caesarion. With his death, Egypt becomes a province of Rome."
         ;;
+      esac
     ;; #Aug
     "Sep")
+      case $day in
         "2")
           holidaygreeting="Anniversary of the battle of Actium"
         ;;
         "4")
           holidaygreeting="Fall of the western empire to Odoacer"
         ;;
+      esac
     ;; #Sep
     "Oct")
+      case $day in
         "19")
           holidaygreeting="Carthago delenda erat! Scipio Africanus defeated Carthage at the Battle of Zama ending the Second Punic War."
         ;;
         "23")
           holidaygreeting="Requiescat in pace, Marce Iunie Brute! Brutus commits suicide."
         ;;
+      esac
     ;; #Oct
 #    "Nov")
 #    ;; #Nov
