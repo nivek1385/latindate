@@ -1,9 +1,8 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Author: Kevin Hartley
-#Version: 2021-05-20
+#Version: 2021-08-09
 #Future Features:
-#-Add dates of note for Nov and Dec
 #-Accept dates other than current date and output formats beyond AUC year.
 
 #Defaults
@@ -299,7 +298,7 @@ holiday() {
           holidaygreeting="Requiescat in pace, Marce Antonie!"
         ;;
         "2")
-          holidaygreeting="Hannibal defeated at the battle of Cannae!"
+          holidaygreeting="Loss to Hannibal at the battle of Cannae!"
         ;;
         "10")
           holselect=$((RANDOM%2)) #random number 0-1
@@ -308,7 +307,6 @@ holiday() {
           else #50% chance
             holidaygreeting="Requiescat in pace, Cleopatra. Cleopatra commits suicide."
           fi
-          holidaygreeting="Trajan named Hadrian as his heir."
         ;;
         "19")
           holidaygreeting="Requiescat in pace, Auguste! Death of Augustus"
@@ -341,10 +339,69 @@ holiday() {
         ;;
       esac
     ;; #Oct
-#    "Nov")
-#    ;; #Nov
-#    "Dec")
-#    ;; #Dec
+    "Nov")
+      case $day in
+        "1")
+          holidaygreeting="Ludi Circenses, enjoy the races!"
+        ;;
+        "4"|"5"|"6"|"7"|"9"|"10"|"11"|"12"|"15"|"16"|"17")
+          holidaygreeting="Ludi Plebeii, enjoy the shows!"
+        ;;
+        "8")
+          holselect=$((RANDOM%4)) #random number 0-3
+          if [ $holselect -eq 0 ]; then #25% chance
+            holidaygreeting="Ludi Plebeii, enjoy the shows!"
+          else #75% chance
+            holidaygreeting="Opening of the Mundus pit."
+          fi
+        ;;
+        "13")
+          holselect=$((RANDOM%4)) #random number 0-3
+          if [ $holselect -eq 0 ]; then #25% chance
+            holidaygreeting="Ludi Plebeii, enjoy the shows!"
+          else #75% chance
+            holidaygreeting="Celebration of the Epulum Jovis"
+          fi
+        ;;
+        "14")
+          holselect=$((RANDOM%4)) #random number 0-3
+          if [ $holselect -eq 0 ]; then #25% chance
+            holidaygreeting="Ludi Plebeii, enjoy the shows!"
+          else #75% chance
+            holidaygreeting="The second Equorum Probatio, watch the horses!"
+          fi
+        ;;
+    ;; #Nov
+    "Dec")
+      case $day in
+        "3")
+          holidaygreeting="Celebration of Bona Dea, remember this one is just for the ladies."
+        ;;
+        "8")
+          holidaygreeting="Festival for Tiberinus Pater and Gaia."
+        ;;
+        "9")
+          holselect=$((RANDOM%2)) #random number 0-1
+          if [ $holselect -eq 0 ]; then #50% chance
+            holidaygreeting="Celebration of the Agonalia in honor of Indiges"
+          else #50% chance
+            holidaygreeting="Celebration of the Septimontium, enjoy the 7 hills!"
+          fi
+        ;;
+        "15")
+          holidaygreeting="Second Consualia Celebration, hope you have your winter food stored safely."
+        ;;
+        "17"|"18"|"19"|"20"|"21"|"22")
+          holidaygreeting="Io Saturnalia!"
+        ;;
+        "23")
+          holidaygreeting="Io Saturnalia! Don't forget your gifts for Sigillaria!"
+        ;;
+        "25")
+          holidaygreeting="Dies Natalis Solis Invicti, summer is coming."
+        ;;
+      esac
+    ;; #Dec
   esac
 } #holiday
 
