@@ -371,6 +371,7 @@ holiday() {
             holidaygreeting="The second Equorum Probatio, watch the horses!"
           fi
         ;;
+      esac
     ;; #Nov
     "Dec")
       case $day in
