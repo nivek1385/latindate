@@ -1,17 +1,19 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Author: Kevin Hartley
-#Version: 2021-08-09
+#Version: 2021-09-28
 #Future Features:
 #-Accept dates other than current date and output formats beyond AUC year.
 
 #Defaults
 holidaygreeting=""
+scriptdir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 day=$(date +%d | sed 's/^0*//')
 month=$(date +%b)
 year=$(date +%Y)
 
+#Debug variable declarations:
 #day=21
 #month="Apr"
 #year=2016
@@ -42,13 +44,13 @@ main() {
   elif [[ $day -ge 2 && $day -lt $((nones - one)) ]]; then
     accmonth
     num=$((nones - day + one))
-    num=$(~/repositories/latindate/num2roman.sh $num)
+    num=$($scriptdir/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Nonas $latmon "
   elif [[ $day -gt $nones && $day -lt $((ides - one)) ]]; then
     accmonth
     num=$((ides - day + one))
-    num=$(~/repositories/latindate/num2roman.sh $num)
+    num=$($scriptdir/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Idus $latmon "
   elif [[ $day == $((nones - one)) ]]; then
@@ -75,7 +77,7 @@ main() {
       ;;
     esac
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
-    num=$(~/repositories/latindate/num2roman.sh $num)
+    num=$($scriptdir/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     if [[ $num == "ii" ]]; then
       latindate="Hodie est pridie Kalendas $latmon "
@@ -86,7 +88,7 @@ main() {
     echo "ERROR: day var didn't match any if statement."
   fi
   aucyear=$(toAUC "$year")
-  convyear=$(~/repositories/latindate/num2roman.sh "$aucyear")
+  convyear=$($scriptdir/num2roman.sh "$aucyear")
   if [[ "$holidaygreeting" != "" ]]; then
     echo "$holidaygreeting"
   fi
