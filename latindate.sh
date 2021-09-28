@@ -44,13 +44,13 @@ main() {
   elif [[ $day -ge 2 && $day -lt $((nones - one)) ]]; then
     accmonth
     num=$((nones - day + one))
-    num=$($scriptdir/num2roman.sh $num)
+    num=$("$scriptdir/num2roman.sh" $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Nonas $latmon "
   elif [[ $day -gt $nones && $day -lt $((ides - one)) ]]; then
     accmonth
     num=$((ides - day + one))
-    num=$($scriptdir/num2roman.sh $num)
+    num=$("$scriptdir/num2roman.sh" $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Idus $latmon "
   elif [[ $day == $((nones - one)) ]]; then
@@ -77,7 +77,7 @@ main() {
       ;;
     esac
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
-    num=$($scriptdir/num2roman.sh $num)
+    num=$("$scriptdir/num2roman.sh" $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     if [[ $num == "ii" ]]; then
       latindate="Hodie est pridie Kalendas $latmon "
@@ -88,7 +88,7 @@ main() {
     echo "ERROR: day var didn't match any if statement."
   fi
   aucyear=$(toAUC "$year")
-  convyear=$($scriptdir/num2roman.sh "$aucyear")
+  convyear=$("$scriptdir/num2roman.sh" "$aucyear")
   if [[ "$holidaygreeting" != "" ]]; then
     echo "$holidaygreeting"
   fi
