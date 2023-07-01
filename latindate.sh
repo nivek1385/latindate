@@ -1,7 +1,7 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Author: Kevin Hartley
-#Version: 2021-09-28
+#Version: 2023-06-30
 #Future Features:
 #-Accept dates other than current date and output formats beyond AUC year.
 
@@ -60,7 +60,6 @@ main() {
     accmonth
     latindate="Hodie est pridie Idus $latmon "
   elif [[ $day -gt $ides ]]; then
-    accmonth
     case $month in
       "Jan"|"Mar"|"May"|"Jul"|"Aug"|"Oct"|"Dec")
         numdays=32
@@ -79,6 +78,8 @@ main() {
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
     num=$("$scriptdir/num2roman.sh" $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
+    month=$(date +'%b' --date="+1 month")
+    accmonth
     if [[ $num == "ii" ]]; then
       latindate="Hodie est pridie Kalendas $latmon "
     else
